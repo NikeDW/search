@@ -1,0 +1,33 @@
+.block {
+    background-color: darkgrey;
+}
+
+#block1_wrap {
+    min-height: 100px;
+    margin-bottom:100px;
+}
+
+#block1 {
+    min-height: 100px;
+    width: 100%;
+    background-color: #00aeff;
+}
+
+#block2 {
+     min-height: 1500px;
+    margin: 50px;
+ }
+
+#block3 {
+    min-height: 1500px;
+    margin: 50px;
+}
+
+#block4 {
+    min-height: 1500px;
+}
+
+.line  {
+    border-top: 1px dashed #000;
+    margin: 50px;
+}
