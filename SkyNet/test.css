@@ -1,0 +1,33 @@
+body {
+    margin: 0;
+}
+
+.bigBlock {
+    font-family: sans-serif;
+    border-bottom: 1px solid #DDDDDD;
+    border-top: 1px solid #DDDDDD;
+}
+.littleBlock {
+    border-top: 1px solid #DDDDDD;
+}
+.firstLittleBlock {
+    border-top: 0;
+}
+.tariffName {
+     font-size: 28px;
+     color: #82C12B;
+    margin: 20px;
+
+}
+.tariffSpeed {
+    color: white;
+    background-color: #0075D9;
+    font-size: 25px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    padding: 10px;
+}
+
+.tariffSpeed span {
+    margin: 20px;
+}
