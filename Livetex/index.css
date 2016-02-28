@@ -1,0 +1,91 @@
+body {
+    font-family: Helvetica,Arial,sans-serif;
+    text-shadow: 0 1px 0 #fff;
+    height: 95vh;
+    overflow-y: hidden;
+    background: #fefefe url(paper.jpeg);
+
+}
+#search {
+    width: 98%;
+    height: 25px;
+    position: relative;
+    display: block;
+    margin: .5em 0;
+    text-decoration: none;
+    border-radius: .3em;
+    transition: all .3s ease-out;
+    margin-top: 35px;
+
+}
+ul {
+    margin: .5em 0;
+    padding: 0;
+}
+
+#list {
+    height: 80vh;
+    overflow-y: scroll;
+}
+#wrap_list {
+    float: left;
+    width: 33%;
+    height: 90vh;
+    border-right: 1px solid #ccc;
+}
+#wrap_textarea {
+    float: left;
+    width: 66%;
+    height: 90vh;
+}
+textarea {
+    width: 100%;
+    border: 0;
+}
+#list li {
+    padding: 7px;
+    border-bottom: 1px solid #ccc;
+    background: #eee;
+    font-weight: 600;
+    color: #222;
+
+    background-image: linear-gradient(#fff,#f1f1f1);
+
+    text-decoration: none;
+    font-size: 18px;
+}
+
+#list li:hover {
+    background: #ddd;
+}
+
+#list li:active {
+    background: #bbb;
+}
+
+
+#name {
+    width: 100%;
+    padding: 0.5em;
+    margin: .5em;
+    border: 0;
+    font-weight: 600;
+    margin-bottom: 1em;
+    margin-top: 0;
+}
+
+#content {
+    padding: 0.5em;
+    margin: .5em;
+    padding-bottom: 20px;
+    height: 80vh;
+}
+
+#control_panel {
+    height: 35px;
+    margin: 0;
+}
+
+#create {
+    margin-left: 0.5em;
+}

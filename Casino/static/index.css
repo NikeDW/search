@@ -1,0 +1,10 @@
+td {
+    text-align: left;
+    border: 1px solid;
+    padding: 3px;
+    width: 100px;
+}
+table {
+    border-collapse: collapse; /* ”бираем двойные линии между €чейками */
+    border: 1px solid white; /* ѕр€чем рамку вокруг таблицы */
+}

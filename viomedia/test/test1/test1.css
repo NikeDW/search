@@ -1,0 +1,44 @@
+body {
+    margin: 0;
+}
+
+.block {
+    background-color: darkgrey;
+    min-height: 1500px;
+    margin: 50px;
+}
+
+.block-wrap {
+    min-height: 100px;
+    margin-bottom:100px;
+}
+
+.standard-block {
+    min-height: 100px;
+    width: 100%;
+    background-color: #00aeff;
+    margin: 0;
+    position: relative;
+    top: 0;
+}
+
+
+.block.last {
+    margin: 0;
+}
+
+.line  {
+    border-bottom: 1px dashed #000;
+    margin-top: 50px;
+    margin-bottom: 50px;
+}
+
+.fixed-block {
+    position: fixed;
+}
+
+.stopped-block {
+    position: absolute;
+    top: 3251px;
+}
+

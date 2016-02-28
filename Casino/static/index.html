@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en" ng-app>
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.0.6/angular.min.js"></script>
+    <script src="student_controller.js"></script>
+    <script src="teacher_controller.js"></script>
+    <script src="head_teacher_controller.js"></script>
+    <link rel="stylesheet" href="index.css">
+</head>
+<body>
+<div ng-controller="studentCtrl">
+    <table>
+        <tr>
+            <td>
+
+            </td>
+            <td ng-repeat="day in student.days">
+                {{day.date}}
+            </td>
+
+        </tr>
+        <tr ng-repeat="time in lessons_times">
+            <td>
+                {{time.number + " " + time.start + " - " + time.end}}
+            </td>
+            <td ng-repeat="day in student.days">
+                {{day.lessons[time.number].subject + " "
+                + day.lessons[time.number].teacher + " " + day.lessons[time.number].room}}
+            </td>
+
+        </tr>
+    </table>
+    <div ng-controller="teacherCtrl">
+        <table>
+            <tr>
+                <td>
+
+                </td>
+                <td ng-repeat="day in student.days">
+                    {{day.date}}
+                </td>
+
+            </tr>
+            <tr ng-repeat="time in lessons_times">
+                <td>
+                    {{time.number + " " + time.start + " - " + time.end}}
+                </td>
+                <td ng-repeat="day in teacher.days">
+                    {{day.lessons[time.number].subject + " " + day.lessons[time.number].class}}
+                </td>
+
+            </tr>
+        </table>
+    </div>
+    <div ng-controller="headTeacherCtrl">
+        <select ng->
+            <option ng-repeat="day in head_teacher.days">
+                {{day}}
+            </option>
+        </select>
+        <table>
+            <tr>
+                <td>
+
+                </td>
+                <td ng-repeat="time in lessons_times">
+                    {{time.number + " " + time.start + " - " + time.end}}
+                </td>
+
+            </tr>
+            <tr ng-repeat="teacher in head_teacher.teachers">
+                <td>
+                    {{teacher.name + "," + teacher.room}}
+                </td>
+                <td ng-repeat="time in lessons_times">
+                    {{teacher.lessons[time.number].subject + " " + teacher.lessons[time.number].class}}
+                </td>
+
+            </tr>
+        </table>
+    </div>
+</div>
+</body>
+</html>
