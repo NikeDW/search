@@ -1,74 +1,120 @@
 $(document).ready(function () {
-    var current_note = null;
-    var notes = [{
-            name: "AAAAAAAAAAAAAAAAA",
-              content: "11"
-            },
-            {
-                name: "BBBBBBB bb bbb bbbbbb",
-                content: "22"
-            },
-            {
-                name: "Ccccccccccccccc",
-                content: "33"
-            },
-            {
-                name: "ddd dddddddd dddd",
-                content: "44"
-            }];
-
     var $name = $('#name');
     var $content = $('#content');
     var $search = $('#search');
+    var $create = $('#create');
+    var $wrap_list = $('#left_block');
 
-    for (var i = 0; i < notes.length; i++) {
-        var $li = $("<li>");
-        $('#list').append($li.text(notes[i].name).val(i)
-        );
-    }
-    $('#wrap_list').click(function(e){
+
+
+    var noteList = new Model.List($('#list'));
+    noteList.refresh(init, noteList);
+    noteList.refresh(filter, noteList.filter);
+    noteList.setCurrentItem(noteList.currentItem, changeSelectNote);
+
+    $create.click(function() {
+        var note = new Model.Note("New note", "");
+        note.pushNote();
+        $name.show().val("New note");
+        $content.show().val("");
+        noteList.add(note, new_note, noteList);
+        noteList.setCurrentItem(note, changeSelectNote);
+        noteList.setFilter("");
+        noteList.refresh(filter, noteList.filter)
+    });
+
+    $name.change(function() {
+        noteList.currentItem.refresh(change_title, $name.val());
+        noteList.refreshOne(noteList.currentItem, rename);
+    });
+
+    $content.change(function() {
+        noteList.currentItem.refresh(change_content, $content.val());
+    });
+
+    $wrap_list.click(function(e){
         var target = $(e.target);
         if (target.is("li")) {
-            var note = notes[target.val()];
-            current_note = target.val();
-            $name.val(note.name);
-            $content.text(note.content)
+
+            var note = noteList.getNoteById(target.val());
+            noteList.setCurrentItem(note, changeSelectNote);
+
         }
     });
-    $('#create').click(function() {
-        if ($name.val() != "")
-        {
-            var elem = {
-                name: $name.val(),
-                content: $content.text()
-            };
-            notes.push(elem);
-            var $li = $("<li>");
-            $('#list').append($li.text(elem.name).val(notes.length - 1)
-            );
-            current_note = notes.length - 1;
-        }
-    });
+
     $search.change(function() {
-        console.log(12);
-        var items = $("li");
-        items.show();
-        for (var i = 0; i < items.length; i++) {
-            if ($(items[i]).text().indexOf($search.val()) == -1) {
-                $(items[i]).hide();
+        noteList.setFilter($search.val());
+        noteList.refresh(filter, noteList.filter)
+    });
+
+    $(window).bind('storage', function (e) {
+        var key = e.originalEvent.key;
+        var value = e.originalEvent.newValue;
+        var id = +key;
+        var note;
+        if (id) {
+            note = noteList.getNoteById(id);
+            if (!note) {
+                note = new Model.Note("New note", "", id);
+                noteList.add(note, new_note, noteList);
             }
+            note.pullNote(rename);
+            noteList.setCurrentItem(note, changeSelectNote)
         }
-    });
-    $name.change(function() {
-        notes[current_note].name = $name.val();
-        $($('ul').children()[current_note]).text($name.val());
-    });
-    $content.change(function() {
-        notes[current_note].name = $content.val();
+
+        if (key == 'currentItem' && key != null) {
+            note = noteList.getNoteById(JSON.parse(value).id);
+            noteList.setCurrentItem(note, changeSelectNote)
+        }
+
+        if (key == 'filter') {
+            noteList.setFilter(value);
+            noteList.refresh(filter, noteList.filter)
+        }
+
+        console.log("key", e.originalEvent.key);
+        console.log("value", e.originalEvent.newValue);
     });
 
+
+    function new_note(item, noteList) {
+        this.$container.append(item.$container.text(item.title));
+        noteList.refreshOne(item, filter, noteList.filter)
+    }
+
+    function change_title(title) {
+        this.title = title;
+    }
+
+    function change_content(content) {
+        this.content = content;
+    }
+
+    function rename() {
+        this.$container.text(this.title)
+    }
+
+    function init(noteList) {
+        noteList.$container.append(this.$container.text(this.title));
+    }
+
+    function filter(string) {
+        if (string == "" || this.title.indexOf(string) != -1) {
+            this.$container.show()
+        } else {
+            this.$container.hide()
+        }
+        $search.val(string);
+    }
+
+    function changeSelectNote() {
+
+        $name.show();
+        $content.show();
+        $name.val(this.title);
+        $content.val(this.content);
+        $('li').removeClass('selected');
+        this.$container.addClass("selected");
+    }
 });
-
-
-
 
